@@ -1,19 +1,20 @@
 #include <iostream>
 #include <cmath>
+#include <climits>
 
 using namespace std;
 
 int nearestNum(const int arr[], int n, int k){
-    int dif[n + 1], nearest = 0;
-    dif[n] = 100000;
+    int dif[n], nearest = 0, min = INT_MAX;
     for (int i = 0; i < n; i++){
         dif[i] = abs(arr[i] - k);
-        // cout << dif[i] << " ";
-    }
-
-    for(int i = n - 1; i <= 0; i++){
-        if (dif[i] == 0) nearest = dif[i];
-        else if (dif[i] <= dif[i+1]) nearest = dif[i];
+        if (dif[i] == 0) { 
+            nearest = i;
+            break;
+        } else if (dif[i] < min) {
+            min = dif[i];
+            nearest = i;
+        }
     }
     return nearest;
 }
